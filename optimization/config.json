@@ -1,0 +1,26 @@
+{
+    "language"        : "PYTHON",
+    "main-file"       : "spear_optimize.py",
+    "experiment-name" : "peak-example",
+    "likelihood"      : "NOISELESS",
+    "max-finished-jobs" : 2,
+    "variables" : {
+        "dropout" : {
+            "type" : "FLOAT",
+            "size" : 1,
+            "min"  : 0.2,
+            "max"  : 0.7
+        },
+        "optimizer" : {
+            "type" : "ENUM",
+            "size" : 1,
+            "options" : ["adadelta", "adam", "rmsprop"]
+        },
+        "batch_size" : {
+            "type" : "ENUM",
+            "size" : 1,
+            "options" : [512,1024,2048]
+        }
+    }
+}
+

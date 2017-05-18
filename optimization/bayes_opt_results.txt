@@ -1,0 +1,346 @@
+April 3 machine temperature
+
+config:
+
+run_config = { 'Xserver' : True,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "nab_machine_temp_april1",
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : '../logs/opt.log',
+               'opt_run_id': "nab_machine_temp_april3"
+               }
+
+multi_step_lstm_config = {
+                            'batch_size' : 512,
+                            'n_epochs' : 60,
+                            'dropout' : 0.6,
+                            'look_back' : 12,
+                            'look_ahead' : 6,
+                            #'layers':{'input': 1, 'hidden1': 5, 'hidden2': 5, 'output': 1},
+                            'layers':{'input': 1, 'hidden1': 5, 'hidden2': 30, 'hidden3': 5,'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 10, 'output': 1},
+                            'loss':'mean_absolute_error',
+                               'optimizer':'rmsprop',
+                            'data_file' : '../resources/data/NAB_machine_temp.npy',
+                            'train_test_ratio' : 0.7,
+                           }
+optimizers = ['adadelta', 'adam', 'rmsprop']
+
+mixed_domain =[{'name': 'dropout', 'type': 'continuous', 'domain': (0.2,0.7)},
+               {'name': 'optimizer_index', 'type': 'discrete', 'domain': (0,1,2)},
+               {'name': 'batch_size', 'type': 'discrete', 'domain': (128,256,512,1024)},
+               {'name': 'look_back', 'type': 'discrete', 'domain': (1,3,6,9,12)}
+               ]
+
+params: [   0.54823459    1.          512.            9.        ]  loss: 0.475397487294
+params: [  3.43069667e-01   0.00000000e+00   5.12000000e+02   9.00000000e+00]  loss: 0.30003178457
+params: [  3.13425727e-01   0.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.313380827646
+params: [   0.47565738    2.          256.           12.        ]  loss: 0.32646774889
+params: [   0.55973448    1.          512.            9.        ]  loss: 0.394939404614
+params: [   0.41155323    0.          128.            6.        ]  loss: 0.30970850763
+params: [  6.90382099e-01   2.00000000e+00   1.02400000e+03   1.00000000e+00]  loss: 1.14663932549
+params: [   0.63187039    1.          512.            9.        ]  loss: 0.465847600181
+params: [  2.76919075e-01   0.00000000e+00   5.12000000e+02   9.00000000e+00]  loss: 0.296175085149
+params: [   0.48620541    0.          128.            6.        ]  loss: 0.333972979832
+params: [  2.35304460e-01   0.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.281572802554
+params: [  2.00000000e-01   0.00000000e+00   5.12000000e+02   9.00000000e+00]  loss: 0.232794418369
+params: [  4.41435138e-01   0.00000000e+00   5.12000000e+02   9.00000000e+00]  loss: 0.365729346871
+params: [   0.30981024    0.          128.            6.        ]  loss: 0.244527141397
+params: [   0.24119557    0.          128.            6.        ]  loss: 0.269379858074
+params: [   0.35796751    2.          256.           12.        ]  loss: 0.288373933322
+params: [   0.26378574    2.          256.           12.        ]  loss: 0.23111227697
+params: [  2.00000000e-01   2.00000000e+00   2.56000000e+02   1.20000000e+01]  loss: 0.237036514863
+params: [  4.55362047e-01   0.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.36958139857
+params: [   0.62168526    2.          256.           12.        ]  loss: 0.414791385885
+params: [  2.32344423e-01   2.00000000e+00   2.56000000e+02   1.20000000e+01]  loss: 0.248836947442
+params: [   0.30366116    2.          256.           12.        ]  loss: 0.226187385207
+params: [   0.67609026    0.          128.            6.        ]  loss: 0.501363792409
+params: [  2.49307714e-01   1.00000000e+00   2.56000000e+02   1.20000000e+01]  loss: 0.20661626463
+params: [   0.30595929    1.          256.           12.        ]  loss: 0.24741472354
+params: [  2.00000000e-01   1.00000000e+00   2.56000000e+02   1.20000000e+01]  loss: 0.212737566744
+params: [   0.40616305    1.          256.           12.        ]  loss: 0.297461346145
+params: [   0.54153054    1.          256.           12.        ]  loss: 0.335677522368
+params: [  2.55277117e-01   0.00000000e+00   2.56000000e+02   1.20000000e+01]  loss: 0.283627215678
+params: [   0.36431944    0.          256.           12.        ]  loss: 0.283616947703
+params: [   0.48024763    0.          256.           12.        ]  loss: 0.306224958163
+params: [   0.62853747    0.          256.           12.        ]  loss: 0.440182544622
+params: [   0.23743663    1.          128.            6.        ]  loss: 0.206997098074
+params: [   0.2944131    1.         128.           6.       ]  loss: 0.279383379297
+params: [   0.2    1.   128.     6. ]  loss: 0.23921693448
+params: [   0.47451409    1.          128.            6.        ]  loss: 0.328357867204
+params: [   0.7    1.   128.     6. ]  loss: 0.456611464705
+params: [   0.20742229    2.          128.            6.        ]  loss: 0.23168336501
+params: [   0.27837878    2.          128.            6.        ]  loss: 0.243726259778
+params: [   0.36965394    2.          128.            6.        ]  loss: 0.28219088135
+params: [   0.49703349    2.          128.            6.        ]  loss: 0.337038353072
+params: [  2.00349377e-01   1.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.236007860344
+params: [  2.74923984e-01   1.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.25023488928
+params: [  3.72628372e-01   1.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.260848001847
+params: [  4.74318420e-01   1.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.309355652101
+params: [   0.69693589    1.          512.           12.        ]  loss: 0.48467923714
+params: [  2.30919800e-01   2.00000000e+00   5.12000000e+02   1.20000000e+01]  loss: 0.247890544447
+==Optimum Hyperparams==
+[  2.49307714e-01   1.00000000e+00   2.56000000e+02   1.20000000e+01]
+Min test loss 0.206616
+
+------------------------------------------------------------------------------------------------------------------------
+April 16 discords power data
+config:
+run_config = { 'Xserver' : False,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "power_data",
+               #'data_file': 'resources/data/nab/nab_machine_temperature/',
+               'data_file': 'resources/data/discords/dutch_power/',
+               'save_figure': False
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : 'logs/opt.log',
+               'opt_run_id': "discords_power_april16",
+               'data_file': 'resources/data/discords/dutch_power/',
+               'save_figure': False
+               }
+
+multi_step_lstm_config = {  'batch_size' : 1024,
+                            'n_epochs' : 60,
+                            'dropout' : 0.50,
+                            'look_back' : 3,
+                            'look_ahead' : 6,
+                            #'layers':{'input': 1, 'hidden1': 5, 'hidden2': 5, 'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 15, 'hidden2': 30, 'hidden3': 15,'output': 1},
+                            'layers':{'input': 1, 'hidden1': 10, 'output': 1},
+                            'loss':'mse',
+                            'optimizer':'rmsprop',
+                            'train_test_ratio' : 0.7,
+                            'shuffle':True,
+                            'validation_split':0.1
+                           }
+
+  optimizers = ['sgd', 'adam', 'rmsprop']
+   layers_array = [{'input': 1, 'hidden1': 64, 'output': 1},
+                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'output': 1},
+                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'hidden3': 10, 'output': 1}
+                    ]
+
+mixed domain:
+mixed_domain =[{'name': 'dropout', 'type': 'continuous', 'domain': (0.2,0.7)},
+               {'name': 'optimizer_index', 'type': 'discrete', 'domain': (0,1,2)},
+               {'name': 'batch_size', 'type': 'discrete', 'domain': (64,128,256,512,1024)},
+               {'name': 'look_back', 'type': 'discrete', 'domain': (1,2,3,6,12,24,36,48,64,72,96)},
+               {'name': 'shuffle', 'type':'discrete', 'domain':(0,1)},
+               {'name': 'learning_rate', 'type':'discrete', 'domain':(0.001,.01,.1)},
+               {'name': 'layers', 'type':'discrete', 'domain':(0,1,2)}
+               ]
+
+GpyOpt settings:
+    opt_id = cfg.opt_config['opt_run_id']
+    max_iter = 60
+    myBopt = GPyOpt.methods.BayesianOptimization(objective_function,  # function to optimize
+                                                 domain=mixed_domain,  # box-constrains of the problem
+                                                 initial_design_numdata = 20,  # number data initial design
+                                                 acquisition_type='EI',  # Expected Improvement
+                                                 exact_feval = True)         # True evaluations
+
+==Optimum Hyperparams==
+[  2.00000000e-01   1.00000000e+00   1.28000000e+02   7.20000000e+01
+   1.00000000e+00   1.00000000e-01   2.00000000e+00]
+Min test loss 0.047701
+
+
+-------------------------------------------------------------------------------------------------------------------------
+April 23
+MultiStep NAB Machine Temperature
+
+run_config = { 'Xserver' : False,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "stateful_power_april21",
+               'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               #'data_file': 'resources/data/discords/dutch_power/',
+               'save_figure': True
+               }
+
+opt_config = { 'Xserver' : False,
+               'log_file' : 'logs/opt.log',
+               'opt_run_id': "nab_machine_temp_failure_april23",
+               'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               'save_figure': False,
+               'model': 'multistep',
+               'max_iter': 50,
+                'initial_evals': 7
+               }
+
+multi_step_lstm_config = {  'batch_size' : 128,
+                            'n_epochs' : 60,
+                            'dropout' : 0.2,
+                            'look_back' :2,
+                            'look_ahead' : 6,
+                            #'layers':{'input': 1, 'hidden1': 5, 'hidden2': 5, 'output': 1},
+                            'layers':{'input': 1, 'hidden1': 30, 'hidden2': 20, 'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 10, 'output': 1},
+                            'loss':'mse',
+                            #'optimizer':'adam',
+                            'train_test_ratio' : 0.7,
+                            'shuffle':False,
+                            'validation':True,
+                            'learning_rate':.01,
+                            'patience':6,
+                           }
+  layers_array = [{'input': 1, 'hidden1': 64, 'output': 1},
+                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'output': 1},
+                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'hidden3': 10, 'output': 1}
+                    ]
+
+multistep_domain =[{'name': 'dropout', 'type': 'continuous', 'domain': (0.2,0.7)},
+               {'name': 'learning_rate', 'type': 'continuous', 'domain': (0.001, .1)},
+               {'name': 'batch_size', 'type': 'discrete', 'domain': (32,64,128,256,512)},
+               {'name': 'look_back', 'type': 'discrete', 'domain': (1,3,6,12,24,36,48,64)},
+               {'name': 'layers', 'type':'discrete', 'domain':(0,1,2)}
+               ]
+
+stateful_domain =[{'name': 'dropout', 'type': 'continuous', 'domain': (0.2,0.7)},
+               {'name': 'learning_rate', 'type': 'continuous', 'domain': (0.001, .1)},
+               {'name': 'look_back', 'type': 'discrete', 'domain': (1,3,6,12,24,36,48,64)},
+               {'name': 'layers', 'type':'discrete', 'domain':(0,1,2)}
+               ]
+
+try:
+    opt_id = cfg.opt_config['opt_run_id']
+    model_type = cfg.opt_config['model']
+    max_iter = int(cfg.opt_config['max_iter'])
+    initial_evals = int(cfg.opt_config['initial_evals'])
+
+    lstm_bopt = GPyOpt.methods.BayesianOptimization(multistep_objective_function,  # function to optimize
+                                                 domain=multistep_domain,  # box-constrains of the problem
+                                                 initial_design_numdata = initial_evals,  # number data initial design
+                                                 acquisition_type='EI',  # Expected Improvement
+                                                 exact_feval = True)         # True evaluations
+
+    # lstm_bopt = GPyOpt.methods.BayesianOptimization(stateful_objective_function,  # function to optimize
+    #                                                  domain=stateful_domain,  # box-constrains of the problem
+    #                                                  initial_design_numdata=3,  # number data initial design
+    #                                                  acquisition_type='EI',  # Expected Improvement
+    #                                                  exact_feval=True)  # True evaluations
+
+
+2017-04-24 00:41:46,434. ==Optimization Hyperparams List==
+2017-04-24 00:41:46,434. [[  5.48234593e-01   6.87981441e-02   5.12000000e+02   1.00000000e+00
+    2.00000000e+00]
+ [  3.43069667e-01   4.86122582e-02   2.56000000e+02   4.80000000e+01
+    1.00000000e+00]
+ [  3.13425727e-01   3.98196343e-02   2.56000000e+02   4.80000000e+01
+    2.00000000e+00]
+ [  4.75657385e-01   3.49746236e-02   5.12000000e+02   6.40000000e+01
+    1.00000000e+00]
+ [  5.59734485e-01   7.31759210e-02   5.12000000e+02   2.40000000e+01
+    1.00000000e+00]
+ [  4.11553230e-01   4.44186522e-02   2.56000000e+02   6.40000000e+01
+    2.00000000e+00]
+ [  6.90382099e-01   6.90811176e-03   1.28000000e+02   1.20000000e+01
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-01   1.28000000e+02   1.20000000e+01
+    0.00000000e+00]
+ [  3.48920097e-01   1.00000000e-03   1.28000000e+02   1.20000000e+01
+    1.00000000e+00]
+ [  3.04666656e-01   1.00000000e-03   1.28000000e+02   1.20000000e+01
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   1.28000000e+02   1.20000000e+01
+    1.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   1.28000000e+02   1.20000000e+01
+    1.00000000e+00]
+ [  2.80150644e-01   1.00000000e-03   1.28000000e+02   1.20000000e+01
+    0.00000000e+00]
+ [  5.48417963e-01   7.22744336e-02   5.12000000e+02   6.00000000e+00
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   5.12000000e+02   3.00000000e+00
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   5.12000000e+02   1.00000000e+00
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   5.12000000e+02   6.00000000e+00
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   5.12000000e+02   1.20000000e+01
+    0.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   5.12000000e+02   1.20000000e+01
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   5.12000000e+02   3.00000000e+00
+    1.00000000e+00]
+ [  4.92461666e-01   7.30342045e-02   3.20000000e+01   1.00000000e+00
+    0.00000000e+00]
+ [  4.73643962e-01   3.31016793e-02   5.12000000e+02   4.80000000e+01
+    1.00000000e+00]
+ [  4.92461666e-01   7.30342045e-02   3.20000000e+01   6.40000000e+01
+    0.00000000e+00]
+ [  6.99556970e-01   8.90009677e-02   2.56000000e+02   3.60000000e+01
+    0.00000000e+00]
+ [  2.86413482e-01   7.88142527e-03   1.28000000e+02   6.40000000e+01
+    0.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   1.28000000e+02   6.40000000e+01
+    2.00000000e+00]
+ [  5.21534419e-01   5.58085779e-02   5.12000000e+02   3.60000000e+01
+    1.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   6.40000000e+01   3.60000000e+01
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   6.40000000e+01   3.60000000e+01
+    0.00000000e+00]
+ [  2.00867458e-01   9.10296501e-03   6.40000000e+01   2.40000000e+01
+    2.00000000e+00]
+ [  2.00867997e-01   9.10306321e-03   6.40000000e+01   4.80000000e+01
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   5.12000000e+02   3.60000000e+01
+    0.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   2.56000000e+02   1.00000000e+00
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   2.56000000e+02   3.00000000e+00
+    1.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   3.20000000e+01   3.60000000e+01
+    2.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   1.28000000e+02   3.60000000e+01
+    0.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   1.28000000e+02   4.80000000e+01
+    0.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   1.28000000e+02   4.80000000e+01
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   1.00000000e+00
+    0.00000000e+00]
+ [  6.99556970e-01   8.90009677e-02   6.40000000e+01   1.00000000e+00
+    0.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   2.56000000e+02   1.00000000e+00
+    1.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   1.28000000e+02   3.60000000e+01
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   1.20000000e+01
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   1.20000000e+01
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   2.56000000e+02   1.20000000e+01
+    1.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   6.00000000e+00
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   6.00000000e+00
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   2.40000000e+01
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   2.56000000e+02   2.40000000e+01
+    2.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   2.56000000e+02   2.40000000e+01
+    1.00000000e+00]
+ [  6.99556970e-01   8.90009677e-02   6.40000000e+01   6.40000000e+01
+    0.00000000e+00]
+ [  2.00882338e-01   9.10567469e-03   3.20000000e+01   1.20000000e+01
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   1.28000000e+02   1.00000000e+00
+    0.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   1.28000000e+02   1.00000000e+00
+    2.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   1.28000000e+02   3.00000000e+00
+    1.00000000e+00]
+ [  7.00000000e-01   1.00000000e-01   1.28000000e+02   1.00000000e+00
+    1.00000000e+00]
+ [  2.00000000e-01   1.00000000e-03   1.28000000e+02   3.00000000e+00
+    0.00000000e+00]]
+2017-04-24 00:41:46,444. ==Optimum Hyperparams==
+2017-04-24 00:41:46,444. [  2.00000000e-01   1.00000000e-03   2.56000000e+02   2.40000000e+01
+   0.00000000e+00]
+2017-04-24 00:41:46,445. Min validation loss 0.078448
+2017-04-24 00:41:46,902. =================End Optimizing=====================

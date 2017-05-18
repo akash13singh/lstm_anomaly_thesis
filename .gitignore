@@ -1,0 +1,13 @@
+idea/
+#resources/data/
+*.swp
+*.pyc
+.ipynb_checkpoints/*.ipynb
+notebooks/.ipynb_checkpoints/*.ipynb
+#*.npy
+.idea/
+imgs/
+env/
+logs/
+optimization/imgs/
+*.txt~
