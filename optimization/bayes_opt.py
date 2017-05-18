@@ -34,8 +34,8 @@ def stateful_objective_function(params):
     layers = layers_array[int(params[3])]
     #batch_size = look_back
 
-    print("Using HyperParams. dropout:%f, learning_rate:%f, batch_size:%d, lookback:%d, layers:%s" % (dropout, learning_rate, batch_size, look_back,layers))
-    logging.info("Using HyperParams. dropout:%f, learning_rate:%f, batch_size:%d, lookback:%d, layers:%s" % (dropout, learning_rate, batch_size,look_back, layers))
+    print("Using HyperParams. dropout:%f, learning_rate:%f, lookback:%d, layers:%s" % (dropout, learning_rate, look_back,layers))
+    logging.info("Using HyperParams. dropout:%f, learning_rate:%f, lookback:%d, layers:%s" % (dropout, learning_rate, look_back, layers))
     data_folder = cfg.opt_config['data_folder']
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
     batch_size = cfg.multi_step_lstm_config['batch_size'] -(look_back+look_ahead) +1
