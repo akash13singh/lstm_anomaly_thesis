@@ -158,18 +158,18 @@ try:
     model_type = cfg.opt_config['model']
     max_iter = int(cfg.opt_config['max_iter'])
     initial_evals = int(cfg.opt_config['initial_evals'])
-
-    lstm_bopt = GPyOpt.methods.BayesianOptimization(multistep_objective_function,  # function to optimize
+    if model_type == "default":
+        lstm_bopt = GPyOpt.methods.BayesianOptimization(multistep_objective_function,  # function to optimize
                                                  domain=multistep_domain,  # box-constrains of the problem
                                                  initial_design_numdata = initial_evals,  # number data initial design
                                                  acquisition_type='EI',  # Expected Improvement
                                                  exact_feval = True)         # True evaluations
-
-    # lstm_bopt = GPyOpt.methods.BayesianOptimization(stateful_objective_function,  # function to optimize
-    #                                                  domain=stateful_domain,  # box-constrains of the problem
-    #                                                  initial_design_numdata=3,  # number data initial design
-    #                                                  acquisition_type='EI',  # Expected Improvement
-    #                                                  exact_feval=True)  # True evaluations
+    elif model_type == "stateful":
+        lstm_bopt = GPyOpt.methods.BayesianOptimization(stateful_objective_function,  # function to optimize
+                                                     domain=stateful_domain,  # box-constrains of the problem
+                                                     initial_design_numdata=3,  # number data initial design
+                                                     acquisition_type='EI',  # Expected Improvement
+                                                     exact_feval=True)  # True evaluations
 
 
     #max_time = 300'

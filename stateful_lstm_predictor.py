@@ -185,7 +185,7 @@ def run():
                                           dropout=dropout, loss=loss, learning_rate=learning_rate)
     model = stateful_lstm.build_model()
     if cfg.run_config['Xserver']:
-        plot_model(model, to_file="imgs/stateful_lstm.png", show_shapes=True, show_layer_names=True)
+        plot_model(model, to_file="imgs/%s_stateful_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
     lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1), patience)
 
