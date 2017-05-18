@@ -32,12 +32,13 @@ def stateful_objective_function(params):
     learning_rate = float(params[1])
     look_back = int(params[2])
     layers = layers_array[int(params[3])]
-    batch_size = look_back
+    #batch_size = look_back
 
     print("Using HyperParams. dropout:%f, learning_rate:%f, batch_size:%d, lookback:%d, layers:%s" % (dropout, learning_rate, batch_size, look_back,layers))
     logging.info("Using HyperParams. dropout:%f, learning_rate:%f, batch_size:%d, lookback:%d, layers:%s" % (dropout, learning_rate, batch_size,look_back, layers))
     data_folder = cfg.opt_config['data_folder']
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
+    batch_size = cfg.multi_step_lstm_config['batch_size'] -(look_back+look_ahead) +1
     epochs = cfg.multi_step_lstm_config['n_epochs']
     train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
     #layers = cfg.multi_step_lstm_config['layers']
@@ -167,7 +168,7 @@ try:
     elif model_type == "stateful":
         lstm_bopt = GPyOpt.methods.BayesianOptimization(stateful_objective_function,  # function to optimize
                                                      domain=stateful_domain,  # box-constrains of the problem
-                                                     initial_design_numdata=3,  # number data initial design
+                                                     initial_design_numdata=initial_evals,  # number data initial design
                                                      acquisition_type='EI',  # Expected Improvement
                                                      exact_feval=True)  # True evaluations
 

@@ -1,7 +1,7 @@
 
 run_config = { 'Xserver' : False,
                'log_file' : 'logs/run.log',
-               'experiment_id' : "discord_power_may5",
+               'experiment_id' : "discord_power_may18",
                #'data_folder': 'resources/data/nab/nab_machine_temperature/',
                'data_folder': 'resources/data/discords/dutch_power/',
                'save_figure': True
@@ -9,15 +9,15 @@ run_config = { 'Xserver' : False,
 
 opt_config = { 'Xserver' : False,
                'log_file' : '../logs/opt.log',
-               'opt_run_id': "stateful_power_april23_test",
-               'data_folder': '../resources/data/nab/nab_machine_temperature/',
+               'opt_run_id': "stateful_power_may18",
+               'data_folder': '../resources/data/discords/dutch_power/',
                'save_figure': False,
-               'model': 'multistep',
-               'max_iter': 40,
-                'initial_evals': 5
+               'model': 'stateful',
+               'max_iter': 10,
+                'initial_evals': 3
                }
 
-multi_step_lstm_config = {  'batch_size': 168,
+multi_step_lstm_config = {  'batch_size': 672,
                             'n_epochs': 50,
                             'dropout': 0.3,
                             'look_back': 1,
