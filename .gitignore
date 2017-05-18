@@ -6,8 +6,8 @@ idea/
 notebooks/.ipynb_checkpoints/*.ipynb
 #*.npy
 .idea/
-imgs/
+#imgs/
 env/
 logs/
-optimization/imgs/
+#optimization/imgs/
 *.txt~
