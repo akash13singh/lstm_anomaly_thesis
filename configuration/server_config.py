@@ -8,9 +8,9 @@ run_config = { 'Xserver' : False,
                }
 
 opt_config = { 'Xserver' : False,
-               'log_file' : 'logs/opt.log',
+               'log_file' : '../logs/opt.log',
                'opt_run_id': "stateful_power_april23_test",
-               'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               'data_folder': '../resources/data/nab/nab_machine_temperature/',
                'save_figure': False,
                'model': 'multistep',
                'max_iter': 40,
