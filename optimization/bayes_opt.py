@@ -84,13 +84,13 @@ def stateful_objective_function(params):
     # train model on training set. validation1 set is used for early stopping
     lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
                      patience)
-
-    validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
-    logging.info("validation2 loss %f"%(validation2_loss))
+    validation_loss = model.evaluate(X_validation1, y_validation1, batch_size=batch_size, verbose=2)
+    #validation_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
+    logging.info("validation2 loss %f"%(validation_loss))
     print(" ")
-    print(" #######validation2 loss %f#########" % (validation2_loss))
-    validation_loss_list.append(validation2_loss)
-    return validation2_loss
+    print(" #######validation2 loss %f#########" % (validation_loss))
+    validation_loss_list.append(validation_loss)
+    return validation_loss
 
 
 def multistep_objective_function(params):
@@ -133,12 +133,13 @@ def multistep_objective_function(params):
     lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
                      patience)
 
-    validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
-    logging.info("validation2 loss %f"%(validation2_loss))
+    validation_loss = model.evaluate(X_validation1, y_validation1, batch_size=batch_size, verbose=2)
+    #validation_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
+    logging.info("validation2 loss %f"%(validation_loss))
     print(" ")
-    print(" #######validation2 loss %f#########" % (validation2_loss))
-    validation_loss_list.append(validation2_loss)
-    return validation2_loss
+    print(" #######validation2 loss %f#########" % (validation_loss))
+    validation_loss_list.append(validation_loss)
+    return validation_loss
 
 
 multistep_domain =[{'name': 'dropout', 'type': 'continuous', 'domain': (0.2,0.7)},
@@ -187,10 +188,14 @@ try:
     print("==Optimum Hyperparams==")
     print (lstm_bopt.x_opt)
     print("Min test loss %f" % min(validation_loss_list))
-    path = "imgs/%s/"%(opt_id)
-    util.mkdir_p(path)
-    lstm_bopt.plot_convergence(filename="%s/convergence.png"%(path))
+
+    if cfg.opt_config['save_figure']:
+        path = "imgs/%s/"%(opt_id)
+        util.mkdir_p(path)
+        lstm_bopt.plot_convergence(filename="%s/convergence.png"%(path))
+
     logging.info("=================End Optimizing=====================")
+
 except:
     traceback.print_exc()
     logging.exception('')

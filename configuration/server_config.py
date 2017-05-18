@@ -14,7 +14,7 @@ opt_config = { 'Xserver' : False,
                'save_figure': False,
                'model': 'stateful',
                'max_iter': 10,
-                'initial_evals': 3
+               'initial_evals': 3
                }
 
 multi_step_lstm_config = {  'batch_size': 672,
