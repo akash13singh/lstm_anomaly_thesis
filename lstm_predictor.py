@@ -160,7 +160,7 @@ def run():
                                           layers=layers,
                                           dropout=dropout, loss=loss, learning_rate=learning_rate)
     model = multistep_lstm.build_model()
-    if cfg.run_config['Xserver']:
+    if cfg.run_config['save_figure']:
         plot_model(model, to_file="imgs/%s_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
     lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1), patience)
@@ -177,6 +177,19 @@ def run():
                                                                )
     np.save(data_folder + "train_predictions", predictions_train)
     np.save(data_folder + "train_true",y_true_train)
+
+    predictions_validation1, y_true_validation1 = get_predictions("Validation1", model, X_validation1, y_validation1,
+                                                                  train_scaler, batch_size, look_ahead, look_back,
+                                                                  epochs, experiment_id,
+                                                                  )
+    predictions_validation1_scaled = train_scaler.transform(predictions_validation1)
+    print "Calculated validation1 loss %f" % (mean_squared_error(
+        np.reshape(y_validation1, [len(y_validation1), look_ahead]),
+        np.reshape(predictions_validation1_scaled, [len(predictions_validation1_scaled), look_ahead])))
+    np.save(data_folder + "validation2_predictions", predictions_validation1)
+    np.save(data_folder + "validation2_true", y_true_validation1)
+    np.save(data_folder + "validation2_labels", validation2_labels)
+
     predictions_validation2, y_true_validation2 = get_predictions("Validation2", model, X_validation2, y_validation2,
                                                                   train_scaler, batch_size, look_ahead, look_back,
                                                                   epochs, experiment_id,
@@ -185,10 +198,11 @@ def run():
     print "Calculated validation2 loss %f"%(mean_squared_error(
         np.reshape(y_validation2, [len(y_validation2), look_ahead]),
         np.reshape(predictions_validation2_scaled, [len(predictions_validation2_scaled), look_ahead])))
-
     np.save(data_folder + "validation2_predictions", predictions_validation2)
     np.save(data_folder + "validation2_true", y_true_validation2)
     np.save(data_folder + "validation2_labels", validation2_labels)
+
+
     predictions_test, y_true_test = get_predictions("Test", model, X_test, y_test, train_scaler, batch_size, look_ahead,
                                                     look_back, epochs, experiment_id,
                                                    )
