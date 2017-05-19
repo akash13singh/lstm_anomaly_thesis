@@ -113,7 +113,6 @@ class MultiStepLSTM(object):
         self.model.compile(loss=self.loss, optimizer= Adam(lr=self.learning_rate))
         logging.info("Compilation Time : %s" % str(time.time() - start))
         self.model.summary()
-
         return self.model
 
 class StatefulMultiStepLSTM(object):
@@ -166,7 +165,7 @@ class StatefulMultiStepLSTM(object):
         return self.model
 
 
-def train_model(model, x_train, y_train, batch_size, epochs, shuffle, validation, validation_data, patience):
+def train_stateful_model(model, x_train, y_train, batch_size, epochs, shuffle, validation, validation_data, patience):
     logging.info("Training...")
     training_start_time = time.time()
     if validation:
@@ -188,4 +187,22 @@ def train_model(model, x_train, y_train, batch_size, epochs, shuffle, validation
     #     model.reset_states()
 
 
+def train_model(model, x_train, y_train, batch_size, epochs, shuffle, validation, validation_data, patience):
+    logging.info("Training...")
+    training_start_time = time.time()
+    if validation:
+        early_stopping = EarlyStopping(monitor='val_loss', patience=patience)
 
+        history_callback = model.fit(x_train, y_train,batch_size=batch_size, epochs=epochs, validation_data = validation_data,
+                                     shuffle=shuffle, verbose=2, callbacks=[early_stopping])
+    else:
+        history_callback = model.fit(x_train, y_train, batch_size=batch_size, epochs= epochs,shuffle=shuffle, verbose=2)
+    logging.info('Training duration (s) : %s', str(time.time() - training_start_time))
+    logging.info("Training Loss per epoch: %s" % str(history_callback.history["loss"]))
+    if validation:
+        logging.info("Validation  Loss per epoch: %s" % str(history_callback.history["val_loss"]))
+    print(history_callback.history.keys())
+    return history_callback
+    # for epoch in range(epochs):
+    #     model.fit(x_train, y_train, batch_size=batch_size, epochs=1,shuffle=shuffle, verbose=2)
+    #     model.reset_states()

@@ -190,7 +190,7 @@ def run():
     if cfg.run_config['save_figure']:
         plot_model(model, to_file="imgs/%s_stateful_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
-    lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
+    lstm.train_stateful_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
                      patience)
 
     validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
