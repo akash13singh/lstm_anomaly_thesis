@@ -1,5 +1,5 @@
 import models.lstm as lstm
-import configuration.config as cfg
+import configuration.server_config as cfg
 import matplotlib
 
 if cfg.run_config['Xserver'] == False:
@@ -8,9 +8,7 @@ if cfg.run_config['Xserver'] == False:
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error
 import time
-
-if cfg.run_config['Xserver']:
-    from keras.utils import plot_model
+from keras.utils import plot_model
 import utilities.utils as util
 import numpy as np
 import logging
