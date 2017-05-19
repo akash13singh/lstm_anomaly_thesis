@@ -23,9 +23,9 @@ def stateful_objective_function(params):
     logging.info("----------------------------------------------------")
     logging.info("inside stateful objective function. params received: %s" % params)
     #optimizers = ['sgd', 'adam', 'rmsprop']
-    layers_array = [{'input': 1, 'hidden1': 64, 'output': 1},
-                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'output': 1},
-                    {'input': 1, 'hidden1': 60, 'hidden2': 30, 'hidden3': 10, 'output': 1}
+    layers_array = [{'input': 1, 'hidden1': 80, 'output': 1},
+                    {'input': 1, 'hidden1': 80, 'hidden2': 80, 'output': 1},
+                    {'input': 1, 'hidden1': 80, 'hidden2': 80, 'hidden3': 80, 'output': 1}
                     ]
 
     dropout = float(params[0])
@@ -94,9 +94,9 @@ def stateful_objective_function(params):
 def multistep_objective_function(params):
     params = params.flatten()
     logging.info("----------------------------------------------------")
-    logging.info("inside objective function. params received: %s" % params)
+    logging.info("inside stateless objective function. params received: %s" % params)
     #optimizers = ['sgd', 'adam', 'rmsprop']
-    layers_array = [{'input': 1, 'hidden1': 64, 'output': 1},
+    layers_array = [{'input': 1, 'hidden1': 80, 'output': 1},
                     {'input': 1, 'hidden1': 60, 'hidden2': 30, 'output': 1},
                     {'input': 1, 'hidden1': 60, 'hidden2': 30, 'hidden3': 10, 'output': 1}
                     ]

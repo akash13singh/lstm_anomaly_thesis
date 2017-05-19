@@ -14,8 +14,6 @@ from keras.utils import plot_model
 import utilities.utils as util
 import numpy as np
 import logging
-import random
-random.seed(123)
 
 # import plotly
 # import plotly.plotly as py
@@ -137,7 +135,6 @@ def run():
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
     batch_size = cfg.multi_step_lstm_config['batch_size'] -(look_back+look_ahead) +1
     epochs = cfg.multi_step_lstm_config['n_epochs']
-    train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
     dropout = cfg.multi_step_lstm_config['dropout']
     layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']

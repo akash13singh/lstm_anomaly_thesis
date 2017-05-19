@@ -127,7 +127,7 @@ class StatefulMultiStepLSTM(object):
         # self.optimizer = optimizer
         self.learning_rate = learning_rate
         self.dropout = dropout
-        logging.info("MultiStepLSTM LSTM Model Info: %s" % (locals()))
+        logging.info("StatefulMultiStepLSTM LSTM Model Info: %s" % (locals()))
 
     def build_model(self):
         # first add input to hidden1
@@ -160,6 +160,7 @@ class StatefulMultiStepLSTM(object):
         # compile model and print summary
         start = time.time()
         self.model.compile(loss=self.loss, optimizer=Adam(lr=self.learning_rate,decay= .99))
+        #self.model.compile(loss=self.loss, optimizer=Adam(lr=self.learning_rate))
         logging.info("Compilation Time : %s" % str(time.time() - start))
         self.model.summary()
         return self.model
