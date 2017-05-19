@@ -1,3 +1,5 @@
+import random
+random.seed(123)
 import GPyOpt
 from numpy.random import seed
 import sys
@@ -8,20 +10,18 @@ import utilities.utils as util
 import configuration.config as cfg
 import logging
 import traceback
-from keras.callbacks import EarlyStopping
-import numpy as np
+
+
 
 FORMAT = '%(asctime)-15s. %(message)s'
 logger = logging.basicConfig(filename=cfg.opt_config['log_file'], level=logging.INFO, format=FORMAT)
-
-seed(123)
 validation_loss_list = []
 
 
 def stateful_objective_function(params):
     params = params.flatten()
     logging.info("----------------------------------------------------")
-    logging.info("inside objective function. params received: %s" % params)
+    logging.info("inside stateful objective function. params received: %s" % params)
     #optimizers = ['sgd', 'adam', 'rmsprop']
     layers_array = [{'input': 1, 'hidden1': 64, 'output': 1},
                     {'input': 1, 'hidden1': 60, 'hidden2': 30, 'output': 1},
@@ -32,7 +32,7 @@ def stateful_objective_function(params):
     learning_rate = float(params[1])
     look_back = int(params[2])
     layers = layers_array[int(params[3])]
-    #batch_size = look_back
+
 
     print("Using HyperParams. dropout:%f, learning_rate:%f, lookback:%d, layers:%s" % (dropout, learning_rate, look_back,layers))
     logging.info("Using HyperParams. dropout:%f, learning_rate:%f, lookback:%d, layers:%s" % (dropout, learning_rate, look_back, layers))
@@ -40,8 +40,6 @@ def stateful_objective_function(params):
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
     batch_size = cfg.multi_step_lstm_config['batch_size'] -(look_back+look_ahead) +1
     epochs = cfg.multi_step_lstm_config['n_epochs']
-    train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
-    #layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']
     shuffle = cfg.multi_step_lstm_config['shuffle']
     patience = cfg.multi_step_lstm_config['patience']
@@ -86,9 +84,9 @@ def stateful_objective_function(params):
                      patience)
     validation_loss = model.evaluate(X_validation1, y_validation1, batch_size=batch_size, verbose=2)
     #validation_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
-    logging.info("validation2 loss %f"%(validation_loss))
+    logging.info("validation loss %f"%(validation_loss))
     print(" ")
-    print(" #######validation2 loss %f#########" % (validation_loss))
+    print(" #######validation loss %f#########" % (validation_loss))
     validation_loss_list.append(validation_loss)
     return validation_loss
 
@@ -115,7 +113,6 @@ def multistep_objective_function(params):
     data_folder = cfg.opt_config['data_folder']
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
     epochs = cfg.multi_step_lstm_config['n_epochs']
-    train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
     #layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']
     shuffle = cfg.multi_step_lstm_config['shuffle']
@@ -135,9 +132,9 @@ def multistep_objective_function(params):
 
     validation_loss = model.evaluate(X_validation1, y_validation1, batch_size=batch_size, verbose=2)
     #validation_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
-    logging.info("validation2 loss %f"%(validation_loss))
+    logging.info("validation loss %f"%(validation_loss))
     print(" ")
-    print(" #######validation2 loss %f#########" % (validation_loss))
+    print(" #######validation loss %f#########" % (validation_loss))
     validation_loss_list.append(validation_loss)
     return validation_loss
 

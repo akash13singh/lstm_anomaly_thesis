@@ -1,3 +1,5 @@
+import random
+random.seed(123)
 import models.lstm as lstm
 import configuration.config as cfg
 import matplotlib
@@ -14,14 +16,15 @@ if cfg.run_config['Xserver']:
 import utilities.utils as util
 import numpy as np
 import logging
-from keras.callbacks import EarlyStopping
+import random
+random.seed(123)
 
 # import plotly
 # import plotly.plotly as py
 # import plotly.graph_objs as go
 # plotly.tools.set_credentials_file(username='aakashsingh', api_key='iMfR7hS1dbnmJ9XB17XO')
 
-np.random.seed(123)
+
 
 
 def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,save_figure,Xserver):
@@ -134,7 +137,7 @@ def run():
     data_folder = cfg.run_config['data_folder']
     look_back = cfg.multi_step_lstm_config['look_back']
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
-    batch_size = cfg.multi_step_lstm_config['batch_size']
+    batch_size = cfg.multi_step_lstm_config['batch_size'] -(look_back+look_ahead) +1
     epochs = cfg.multi_step_lstm_config['n_epochs']
     train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
     dropout = cfg.multi_step_lstm_config['dropout']
@@ -184,10 +187,11 @@ def run():
                                           layers=layers,
                                           dropout=dropout, loss=loss, learning_rate=learning_rate)
     model = stateful_lstm.build_model()
-    if cfg.run_config['Xserver']:
+    if cfg.run_config['save_figure']:
         plot_model(model, to_file="imgs/%s_stateful_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
-    lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1), patience)
+    lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
+                     patience)
 
     validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
     print "Validation2 Loss %s" % (validation2_loss)
@@ -201,6 +205,22 @@ def run():
                                                                )
     np.save(data_folder + "train_predictions", predictions_train)
     np.save(data_folder + "train_true",y_true_train)
+
+
+    predictions_validation1, y_true_validation1 = get_predictions("Validation1", model, X_validation1, y_validation1,
+                                                                  train_scaler, batch_size, look_ahead, look_back,
+                                                                  epochs, experiment_id,
+                                                                  )
+    predictions_validation1_scaled = train_scaler.transform(predictions_validation1)
+    print "Calculated validation1 loss %f" % (mean_squared_error(
+        np.reshape(y_validation1, [len(y_validation1), look_ahead]),
+        np.reshape(predictions_validation1_scaled, [len(predictions_validation1_scaled), look_ahead])))
+
+    np.save(data_folder + "validation1_predictions", predictions_validation1)
+    np.save(data_folder + "validation1_true", y_true_validation1)
+
+
+
     predictions_validation2, y_true_validation2 = get_predictions("Validation2", model, X_validation2, y_validation2,
                                                                   train_scaler, batch_size, look_ahead, look_back,
                                                                   epochs, experiment_id,
@@ -212,7 +232,8 @@ def run():
 
     np.save(data_folder + "validation2_predictions", predictions_validation2)
     np.save(data_folder + "validation2_true", y_true_validation2)
-    np.save(data_folder + "validation_labels", validation2_labels)
+    np.save(data_folder + "validation2_labels", validation2_labels)
+
     predictions_test, y_true_test = get_predictions("Test", model, X_test, y_test, train_scaler, batch_size, look_ahead,
                                                     look_back, epochs, experiment_id,
                                                    )
