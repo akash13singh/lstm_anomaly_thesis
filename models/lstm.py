@@ -110,7 +110,7 @@ class MultiStepLSTM(object):
 
         # compile model and print summary
         start = time.time()
-        self.model.compile(loss=self.loss, optimizer= Adam(lr=self.learning_rate))
+        self.model.compile(loss=self.loss, optimizer= Adam(lr=self.learning_rate,decay=.99))
         logging.info("Compilation Time : %s" % str(time.time() - start))
         self.model.summary()
         return self.model
