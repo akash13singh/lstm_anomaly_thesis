@@ -1,5 +1,7 @@
+import random
+random.seed(123)
 import models.lstm as lstm
-import configuration.server_config as cfg
+import configuration.config as cfg
 import matplotlib
 
 if cfg.run_config['Xserver'] == False:
@@ -19,7 +21,7 @@ from keras.callbacks import EarlyStopping
 # import plotly.graph_objs as go
 # plotly.tools.set_credentials_file(username='aakashsingh', api_key='iMfR7hS1dbnmJ9XB17XO')
 
-np.random.seed(123)
+
 
 
 def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,save_figure,Xserver):
@@ -135,7 +137,6 @@ def run():
     look_ahead = cfg.multi_step_lstm_config['look_ahead']
     batch_size = cfg.multi_step_lstm_config['batch_size']
     epochs = cfg.multi_step_lstm_config['n_epochs']
-    train_test_ratio = cfg.multi_step_lstm_config['train_test_ratio']
     dropout = cfg.multi_step_lstm_config['dropout']
     layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']
