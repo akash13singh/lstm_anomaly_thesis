@@ -20,7 +20,17 @@ import logging
 # import plotly.graph_objs as go
 # plotly.tools.set_credentials_file(username='aakashsingh', api_key='iMfR7hS1dbnmJ9XB17XO')
 
-
+import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pylab as pylab
+params = {'legend.fontsize': 'x-large',
+          'figure.figsize': (15, 5),
+         'axes.labelsize': 'x-large',
+         'axes.titlesize':'x-large',
+         'xtick.labelsize':'x-large',
+         'ytick.labelsize':'x-large'}
+pylab.rcParams.update(params)
+sns.set_style("whitegrid")
 
 
 def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,save_figure,Xserver):
@@ -28,10 +38,10 @@ def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,s
     if look_ahead > 1:
         step = look_ahead - 1
     for idx, i in enumerate(np.arange(0, look_ahead, step)):
-        plt.figure()
-        plt.title(title+" Timestep: %d "%i)
-        plt.xlabel("Time")
-        plt.ylabel("Value")
+        fig = plt.figure()
+        #plt.title(title+" Timestep: %d "%i)
+        plt.xlabel("Time Step")
+        plt.ylabel("Power Consumption")
         plt.plot(true_values, label="actual", linewidth=1)
         plt.plot(predictions_timesteps[:, i], label="prediction", linewidth=1, linestyle="--")
         error = abs(true_values - predictions_timesteps[:, i])
@@ -39,7 +49,7 @@ def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,s
         plt.legend()
         plt.tight_layout()
         if save_figure:
-            util.save_figure(path,"%s_timestep_%d"%(context,i), plt)
+            util.save_figure(path,"%s_timestep_%d"%(context,i), fig)
 
     if Xserver:
         plt.show()
@@ -185,8 +195,17 @@ def run():
     if cfg.run_config['save_figure']:
         plot_model(model, to_file="imgs/%s_stateful_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
-    lstm.train_stateful_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
+    history = lstm.train_stateful_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1),
                      patience)
+    fig = plt.figure()
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+    if cfg.run_config['save_figure']:
+        util.save_figure("%s/%s/"%("imgs",experiment_id), "train_errors" , fig)
 
     validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
     print "Validation2 Loss %s" % (validation2_loss)
