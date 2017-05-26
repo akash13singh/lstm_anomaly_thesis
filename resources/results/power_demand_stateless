@@ -1,0 +1,124 @@
+/usr/bin/python2.7 /home/akash/projects/thesis/lstm_anomaly_thesis/lstm_predictor.py
+Using TensorFlow backend.
+Loading data... 
+/usr/local/lib/python2.7/dist-packages/sklearn/utils/validation.py:429: DataConversionWarning: Data with input dtype int64 was converted to float64 by StandardScaler.
+  warnings.warn(msg, _DataConversionWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:586: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+data mean -0.000000, data variance 1.000000
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:91: UserWarning: The `input_dim` and `input_length` arguments in recurrent layers are deprecated. Use `input_shape` instead.
+  return_sequences= True if self.n_hidden>1 else False))
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:91: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(units=200, return_sequences=False, input_shape=(1, 1))`
+  return_sequences= True if self.n_hidden>1 else False))
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:103: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(units=1)`
+  self.model.add(Dense(output_dim=self.layers['output']))
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_1 (LSTM)                (None, 200)               161600    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 200)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 201       
+_________________________________________________________________
+repeat_vector_1 (RepeatVecto (None, 1, 1)              0         
+_________________________________________________________________
+activation_1 (Activation)    (None, 1, 1)              0         
+=================================================================
+Total params: 161,801
+Trainable params: 161,801
+Non-trainable params: 0
+_________________________________________________________________
+Train on 22846 samples, validate on 2014 samples
+Epoch 1/50
+2s - loss: 0.1013 - val_loss: 0.0184
+Epoch 2/50
+1s - loss: 0.0338 - val_loss: 0.0171
+Epoch 3/50
+1s - loss: 0.0318 - val_loss: 0.0160
+Epoch 4/50
+1s - loss: 0.0301 - val_loss: 0.0154
+Epoch 5/50
+1s - loss: 0.0290 - val_loss: 0.0153
+Epoch 6/50
+1s - loss: 0.0288 - val_loss: 0.0153
+Epoch 7/50
+1s - loss: 0.0283 - val_loss: 0.0154
+['loss', 'val_loss']
+Validation2 Loss 0.0175301469183
+Test Loss 0.0188997130463
+(22846, 1, 1)
+(2014, 1, 1)
+Calculated validation1 loss 0.015362
+(5374, 1, 1)
+Calculated validation2 loss 0.017530
+(4318, 1, 1)
+Calculated test loss 0.018900
+
+Process finished with exit code 0
+
+
+
+
+run_config = { 'Xserver' : True,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "power_may25_stateless",
+               #'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               #'data_folder': 'resources/data/discords/space_shuttle/',
+               'data_folder': 'resources/data/discords/dutch_power/',
+               'save_figure': True
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : '../logs/opt.log',
+               'opt_run_id': "machine_temp_may24",
+               'data_folder': '../resources/data/discords/dutch_power/',
+               'save_figure': True,
+               'model': 'stateful',
+               'max_iter': 3,
+                'initial_evals': 1
+               }
+
+multi_step_lstm_config = {  'batch_size': 672,
+                            'n_epochs': 50,
+                            'dropout': 0.4,
+                            'look_back': 1,
+                            'look_ahead': 1,
+                            #'layers':{'input': 1, 'hidden1':20, 'hidden2':5,  'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 200, 'hidden2': 80, 'hidden3': 40, 'hidden4': 10,'output': 1},
+                            'layers': {'input': 1, 'hidden1': 200, 'output': 1},
+                            'loss': 'mse',
+                            #'optimizer': 'adam',
+                            'train_test_ratio' : 0.7,
+                            'shuffle': False,
+                            'validation': True,
+                            'learning_rate': .1,
+                            'patience': 1,
+                           }
+#
+# multi_step_lstm_config = {  'experiment_id' : "multistep_multikpi",
+#                             'batch_size' : 1024,
+#                             'n_epochs' : 5,
+#                             'train_test_ratio' : 0.7,
+#                             'dropout' : 0.4,
+#                             'look_back' : 24,
+#                             'look_ahead' : 12,
+#                             'layers':{'input': 1, 'hidden1': 5, 'hidden2': 30, 'hidden3': 5, 'output': 1},
+#                             'loss':'mse',
+#                             'optimizer':'rmsprop'
+#                            }
+

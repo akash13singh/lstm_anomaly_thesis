@@ -1,0 +1,57 @@
+ Run id discord_power_may18_trial
+2017-05-20 17:05:23,945.  HYPERPRAMRAMS : {'layers': {'input': 1, 'hidden1': 300, 'output': 1}, 'loss': 'mse', 'shuffle': False, 'learning_rate': 0.01, 'look_ahead': 1, 'batch_size': 671, 'epochs': 50, 'patience': 1, 'experiment_id': 'discord_power_may18_trial', 'data_folder': 'resources/data/discords/dutch_power/', 'validation': True, 'look_back': 1, 'dropout': 0.4}
+2017-05-20 17:05:23,990. StatefulMultiStepLSTM LSTM Model Info: {'layers': {'input': 1, 'hidden1': 300, 'output': 1}, 'loss': 'mse', 'learning_rate': 0.01, 'look_ahead': 1, 'batch_size': 671, 'self': <models.lstm.StatefulMultiStepLSTM object at 0x7fbb28997290>, 'look_back': 1, 'dropout': 0.4}
+2017-05-20 17:05:24,408. Compilation Time : 0.0243430137634
+2017-05-20 17:05:24,456. Training...
+2017-05-20 17:05:30,090. Training duration (s) : 5.63428401947
+2017-05-20 17:05:30,091. Training Loss per epoch: [0.37796130743535128, 0.11474189847050344, 0.098930906668743671]
+2017-05-20 17:05:30,091. Validation  Loss per epoch: [0.78652737538019812, 0.91296951969464624, 0.91992159684499109]
+2017-05-20 17:05:30,225. Validation2 Loss 0.167401450686
+2017-05-20 17:05:30,333. Test Loss 0.268896177411
+2017-05-20 17:05:31,079. Train RMSE on 1 timestep prediction 74.123132
+2017-05-20 17:05:31,079.  Train RMSE Naive One Timestep Shift 40.304445
+2017-05-20 17:05:34,125. Validation1 RMSE on 1 timestep prediction 278.459558
+2017-05-20 17:05:34,125.  Validation1 RMSE Naive One Timestep Shift 35.662538
+2017-05-20 17:05:38,594. Validation2 RMSE on 1 timestep prediction 118.767303
+2017-05-20 17:05:38,594.  Validation2 RMSE Naive One Timestep Shift 38.420516
+2017-05-20 17:05:44,721. Test RMSE on 1 timestep prediction 150.506158
+2017-05-20 17:05:44,722.  Test RMSE Naive One Timestep Shift 38.811601
+Decay 0.99
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+run_config = { 'Xserver' : True,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "discord_power_may21",
+               #'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               'data_folder': 'resources/data/discords/dutch_power/',
+               'save_figure': True
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : '../logs/opt.log',
+               'opt_run_id': "discord_power_may18_trial",
+               'data_folder': '../resources/data/discords/dutch_power/',
+               'save_figure': True,
+               'model': 'stateful',
+               'max_iter': 3,
+                'initial_evals': 1
+               }
+
+multi_step_lstm_config = {  'batch_size': 672,
+                            'n_epochs': 50	,
+                            'dropout': 0.4,
+                            'look_back': 1,
+                            'look_ahead' : 1,
+                            #'layers':{'input': 1, 'hidden1':300, 'hidden2':50,  'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 200, 'hidden2': 80, 'hidden3': 40, 'hidden4': 10,'output': 1},
+                            'layers': {'input': 1, 'hidden1': 300,  'output': 1},
+                            'loss': 'mse',
+                            #'optimizer': 'adam',
+                            'train_test_ratio' : 0.7,
+                            'shuffle': False,
+                            'validation': True,
+                            'learning_rate': .01,
+                            'patience': 1,
+                           }
+______________________________________________________________
+
+RESULTS

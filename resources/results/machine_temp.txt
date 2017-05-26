@@ -1,0 +1,167 @@
+2017-05-21 16:47:44,326. ----------------------------------------------------
+2017-05-21 16:47:44,326. Run id nab_machine_temp_may21
+2017-05-21 16:47:44,326.  HYPERPRAMRAMS : {'layers': {'input': 1, 'hidden1': 64, 'output': 1}, 'loss': 'mse', 'shuffle': False, 'learning_rate': 0.01, 'look_ahead': 12, 'batch_size': 1024, 'epochs': 50, 'patience': 1, 'experiment_id': 'nab_machine_temp_may21', 'data_folder': 'resources/data/nab/nab_machine_temperature/', 'validation': True, 'look_back': 24, 'dropout': 0.2}
+2017-05-21 16:47:44,361. MultiStepLSTM LSTM Model Info: {'layers': {'input': 1, 'hidden1': 64, 'output': 1}, 'loss': 'mse', 'learning_rate': 0.01, 'look_ahead': 12, 'self': <models.lstm.MultiStepLSTM object at 0x7fd2b9bc9210>, 'look_back': 24, 'dropout': 0.2}
+2017-05-21 16:47:44,838. Compilation Time : 0.0250079631805
+2017-05-21 16:47:44,893. Training...
+2017-05-21 16:52:10,044. Training duration (s) : 265.151138067
+2017-05-21 16:52:10,044. Training Loss per epoch: [0.30522996868824237, 0.16055593617060734, 0.14874656863576302, 0.14243520156414954, 0.13851074755647683, 0.1338395266764735, 0.13108767949133324, 0.13095631137846511, 0.12928334571285793, 0.12721548875159705, 0.12606027218356619, 0.12463194054849959, 0.12297110598840984, 0.12419186545217049, 0.12332033015810968, 0.12149209753110943, 0.12192451371495819, 0.12035621657810611, 0.12005175819509276, 0.11934762583866197, 0.11719780101097119, 0.11880328312637016, 0.11859865870922619, 0.11828537751038799, 0.11640594435640923, 0.11778331534352075, 0.11671802507113498, 0.11595539520618915, 0.11623650226422165, 0.11661037485300348, 0.11576263612588486, 0.11467755048112677, 0.11448286049086932, 0.11535836619796347, 0.11373765004588356, 0.11359355730139135, 0.11477196115377218, 0.1136026337625529, 0.11317265215654705, 0.11363546106034295, 0.11309576726190275, 0.112980700133635, 0.11321215090035504, 0.11206178889569146, 0.11233443906527982, 0.11242115099290129, 0.11326365397407695, 0.1120705885403826, 0.11154642433749902, 0.11138689893832594]
+2017-05-21 16:52:10,238. Validation  Loss per epoch: [0.11357999675803715, 0.075273628570272935, 0.06646981605705822, 0.062979162700714603, 0.05971753394304638, 0.057097577065977144, 0.055007383814849306, 0.052766962183846369, 0.050155383444601492, 0.048293813315343687, 0.046838037055453093, 0.045227821902989483, 0.044030235499464054, 0.043181992239422269, 0.042256957474147976, 0.041192420334371614, 0.040290752565988928, 0.039263791454735623, 0.038344785197234069, 0.037813111338564145, 0.037257134113260496, 0.036873453887560033, 0.03639728407705984, 0.03596898229745981, 0.035357762942604697, 0.034917059978703868, 0.034519376987624764, 0.03420718350718098, 0.03384943723037679, 0.03342460651337887, 0.033100496910806194, 0.032793319887585111, 0.032500257041291954, 0.032226344270090905, 0.03205274574218258, 0.031838443116902447, 0.031584868134136267, 0.03134466488728814, 0.03114399223131091, 0.030964346716053599, 0.030793782897747545, 0.030569879678628779, 0.030302477005775683, 0.030151848350801775, 0.030022581151309406, 0.029869315658418934, 0.029760671959769343, 0.029578887273333833, 0.029408242192960555, 0.029289672852203411]
+2017-05-21 16:52:10,463. Validation2 Loss 0.952174555477
+2017-05-21 16:52:10,698. Test Loss 0.391458677144
+2017-05-21 16:52:12,495. Train RMSE on 1 timestep prediction 1.724871
+2017-05-21 16:52:12,496. Train RMSE on 2 timestep prediction 1.947666
+2017-05-21 16:52:12,496. Train RMSE on 3 timestep prediction 2.173422
+2017-05-21 16:52:12,496. Train RMSE on 4 timestep prediction 2.396492
+2017-05-21 16:52:12,497. Train RMSE on 5 timestep prediction 2.613262
+2017-05-21 16:52:12,497. Train RMSE on 6 timestep prediction 2.822271
+2017-05-21 16:52:12,497. Train RMSE on 7 timestep prediction 3.023322
+2017-05-21 16:52:12,497. Train RMSE on 8 timestep prediction 3.216140
+2017-05-21 16:52:12,497. Train RMSE on 9 timestep prediction 3.400994
+2017-05-21 16:52:12,498. Train RMSE on 10 timestep prediction 3.577687
+2017-05-21 16:52:12,498. Train RMSE on 11 timestep prediction 3.746867
+2017-05-21 16:52:12,498. Train RMSE on 12 timestep prediction 3.908680
+2017-05-21 16:52:12,498.  Train RMSE Naive One Timestep Shift 1.057908
+2017-05-21 16:52:16,402. Validation1 RMSE on 1 timestep prediction 1.238545
+2017-05-21 16:52:16,403. Validation1 RMSE on 2 timestep prediction 1.269462
+2017-05-21 16:52:16,403. Validation1 RMSE on 3 timestep prediction 1.303118
+2017-05-21 16:52:16,403. Validation1 RMSE on 4 timestep prediction 1.341158
+2017-05-21 16:52:16,403. Validation1 RMSE on 5 timestep prediction 1.382381
+2017-05-21 16:52:16,403. Validation1 RMSE on 6 timestep prediction 1.427800
+2017-05-21 16:52:16,404. Validation1 RMSE on 7 timestep prediction 1.474583
+2017-05-21 16:52:16,404. Validation1 RMSE on 8 timestep prediction 1.523631
+2017-05-21 16:52:16,404. Validation1 RMSE on 9 timestep prediction 1.572993
+2017-05-21 16:52:16,404. Validation1 RMSE on 10 timestep prediction 1.622764
+2017-05-21 16:52:16,404. Validation1 RMSE on 11 timestep prediction 1.672477
+2017-05-21 16:52:16,404. Validation1 RMSE on 12 timestep prediction 1.720884
+2017-05-21 16:52:16,404.  Validation1 RMSE Naive One Timestep Shift 0.963930
+2017-05-21 16:52:20,082. Validation2 RMSE on 1 timestep prediction 8.419087
+2017-05-21 16:52:20,083. Validation2 RMSE on 2 timestep prediction 8.489906
+2017-05-21 16:52:20,083. Validation2 RMSE on 3 timestep prediction 8.566998
+2017-05-21 16:52:20,083. Validation2 RMSE on 4 timestep prediction 8.648564
+2017-05-21 16:52:20,083. Validation2 RMSE on 5 timestep prediction 8.733277
+2017-05-21 16:52:20,083. Validation2 RMSE on 6 timestep prediction 8.820390
+2017-05-21 16:52:20,084. Validation2 RMSE on 7 timestep prediction 8.909351
+2017-05-21 16:52:20,084. Validation2 RMSE on 8 timestep prediction 8.999826
+2017-05-21 16:52:20,084. Validation2 RMSE on 9 timestep prediction 9.091557
+2017-05-21 16:52:20,084. Validation2 RMSE on 10 timestep prediction 9.184226
+2017-05-21 16:52:20,085. Validation2 RMSE on 11 timestep prediction 9.277303
+2017-05-21 16:52:20,085. Validation2 RMSE on 12 timestep prediction 9.370637
+2017-05-21 16:52:20,085.  Validation2 RMSE Naive One Timestep Shift 1.126400
+2017-05-21 16:52:24,925. Test RMSE on 1 timestep prediction 4.662291
+2017-05-21 16:52:24,925. Test RMSE on 2 timestep prediction 4.821181
+2017-05-21 16:52:24,926. Test RMSE on 3 timestep prediction 4.992011
+2017-05-21 16:52:24,926. Test RMSE on 4 timestep prediction 5.171085
+2017-05-21 16:52:24,926. Test RMSE on 5 timestep prediction 5.356166
+2017-05-21 16:52:24,926. Test RMSE on 6 timestep prediction 5.545209
+2017-05-21 16:52:24,926. Test RMSE on 7 timestep prediction 5.737198
+2017-05-21 16:52:24,926. Test RMSE on 8 timestep prediction 5.931019
+2017-05-21 16:52:24,926. Test RMSE on 9 timestep prediction 6.125635
+2017-05-21 16:52:24,927. Test RMSE on 10 timestep prediction 6.320361
+2017-05-21 16:52:24,927. Test RMSE on 11 timestep prediction 6.514822
+2017-05-21 16:52:24,927. Test RMSE on 12 timestep prediction 6.708719
+2017-05-21 16:52:24,927.  Test RMSE Naive One Timestep Shift 1.240957
+2017-05-21 16:52:31,743. -------------------------run complete----------------------------------------------
+2017-05-21 16:52:31,743. 
+
+run_config = { 'Xserver' : True,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "nab_machine_temp_may21",
+               'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               #'data_folder': 'resources/data/discords/dutch_power/',
+               'save_figure': True
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : '../logs/opt.log',
+               'opt_run_id': "discord_power_may18_trial",
+               'data_folder': '../resources/data/discords/dutch_power/',
+               'save_figure': True,
+               'model': 'stateful',
+               'max_iter': 3,
+                'initial_evals': 1
+               }
+
+multi_step_lstm_config = {  'batch_size': 1024,
+                            'n_epochs': 50,
+                            'dropout': 0.2,
+                            'look_back': 24,
+                            'look_ahead' : 12,
+                            #'layers':{'input': 1, 'hidden1':20, 'hidden2':5,  'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 200, 'hidden2': 80, 'hidden3': 40, 'hidden4': 10,'output': 1},
+                            'layers': {'input': 1, 'hidden1': 64,  'output': 1},
+                            'loss': 'mse',
+                            #'optimizer': 'adam',
+                            'train_test_ratio' : 0.7,
+                            'shuffle': False,
+                            'validation': True,
+                            'learning_rate': .01,
+                            'patience': 1,
+                           }
+-------------------------------------------------------------------------------------
+/usr/bin/python2.7 /home/akash/projects/thesis/lstm_anomaly_thesis/lstm_predictor.py
+Using TensorFlow backend.
+Loading data... 
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:586: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+data mean -0.000000, data variance 1.000000
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/usr/local/lib/python2.7/dist-packages/sklearn/preprocessing/data.py:649: DeprecationWarning: Passing 1d arrays as data is deprecated in 0.17 and will raise ValueError in 0.19. Reshape your data either using X.reshape(-1, 1) if your data has a single feature or X.reshape(1, -1) if it contains a single sample.
+  warnings.warn(DEPRECATION_MSG_1D, DeprecationWarning)
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:91: UserWarning: The `input_dim` and `input_length` arguments in recurrent layers are deprecated. Use `input_shape` instead.
+  return_sequences= True if self.n_hidden>1 else False))
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:91: UserWarning: Update your `LSTM` call to the Keras 2 API: `LSTM(units=64, return_sequences=False, input_shape=(24, 1))`
+  return_sequences= True if self.n_hidden>1 else False))
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE3 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.1 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use SSE4.2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use AVX2 instructions, but these are available on your machine and could speed up CPU computations.
+W tensorflow/core/platform/cpu_feature_guard.cc:45] The TensorFlow library wasn't compiled to use FMA instructions, but these are available on your machine and could speed up CPU computations.
+/home/akash/projects/thesis/lstm_anomaly_thesis/models/lstm.py:103: UserWarning: Update your `Dense` call to the Keras 2 API: `Dense(units=1)`
+  self.model.add(Dense(output_dim=self.layers['output']))
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+lstm_1 (LSTM)                (None, 64)                16896     
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 64)                0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 1)                 65        
+_________________________________________________________________
+repeat_vector_1 (RepeatVecto (None, 12, 1)             0         
+_________________________________________________________________
+activation_1 (Activation)    (None, 12, 1)             0         
+=================================================================
+Total params: 16,961
+Trainable params: 16,961
+Non-trainable params: 0
+_________________________________________________________________
+Train on 15747 samples, validate on 828 samples
+Epoch 1/50
+6s - loss: 0.2067 - val_loss: 0.0583
+Epoch 2/50
+6s - loss: 0.1216 - val_loss: 0.0366
+Epoch 3/50
+6s - loss: 0.1171 - val_loss: 0.0400
+Epoch 4/50
+5s - loss: 0.1134 - val_loss: 0.0423
+['loss', 'val_loss']
+Validation2 Loss 1.49101882846
+Test Loss 0.43788290138
+(15747, 12, 1)
+(828, 12, 1)
+Calculated validation1 loss 0.062408
+(2844, 12, 1)
+Calculated validation2 loss 1.643938
+(3132, 12, 1)
+Calculated test loss 0.573302
+
+Process finished with exit code 0
+
+

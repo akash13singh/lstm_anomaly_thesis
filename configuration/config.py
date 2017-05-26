@@ -1,15 +1,17 @@
 
 run_config = { 'Xserver' : True,
                'log_file' : 'logs/run.log',
-               'experiment_id' : "discord_power_may18_trial",
+               'experiment_id' : "ECG_may25_stateless",
                #'data_folder': 'resources/data/nab/nab_machine_temperature/',
-               'data_folder': 'resources/data/discords/dutch_power/',
+               #'data_folder': 'resources/data/discords/space_shuttle/',
+               #'data_folder': 'resources/data/discords/dutch_power/',
+               'data_folder': 'resources/data/discords/ECG/',
                'save_figure': True
                }
 
 opt_config = { 'Xserver' : True,
                'log_file' : '../logs/opt.log',
-               'opt_run_id': "discord_power_may18_trial",
+               'opt_run_id': "machine_temp_may24",
                'data_folder': '../resources/data/discords/dutch_power/',
                'save_figure': True,
                'model': 'stateful',
@@ -17,21 +19,21 @@ opt_config = { 'Xserver' : True,
                 'initial_evals': 1
                }
 
-multi_step_lstm_config = {  'batch_size': 672,
-                            'n_epochs': 50,
-                            'dropout': 0.4,
-                            'look_back': 1,
-                            'look_ahead' : 1,
-                            #'layers':{'input': 1, 'hidden1':300, 'hidden2':50,  'output': 1},
+multi_step_lstm_config = {  'batch_size': 1024,
+                            'n_epochs': 100,
+                            'dropout': 0.2,
+                            'look_back': 3,
+                            'look_ahead': 5,
+                            #'layers':{'input': 1, 'hidden1':20, 'hidden2':5,  'output': 1},
                             #'layers':{'input': 1, 'hidden1': 200, 'hidden2': 80, 'hidden3': 40, 'hidden4': 10,'output': 1},
-                            'layers': {'input': 1, 'hidden1': 300,  'output': 1},
+                            'layers': {'input': 1, 'hidden1': 200,  'output': 1},
                             'loss': 'mse',
                             #'optimizer': 'adam',
                             'train_test_ratio' : 0.7,
                             'shuffle': False,
                             'validation': True,
-                            'learning_rate': .01,
-                            'patience': 1,
+                            'learning_rate': .1,
+                            'patience': 5,
                            }
 #
 # multi_step_lstm_config = {  'experiment_id' : "multistep_multikpi",
