@@ -10,6 +10,7 @@ if cfg.run_config['Xserver']:
     import seaborn as sns
 import logging
 from keras.callbacks import EarlyStopping
+from matplotlib.backends.backend_pdf import PdfPages
 
 logger = logging.getLogger(__name__).addHandler(logging.StreamHandler())
 
@@ -156,10 +157,12 @@ def mkdir_p(mypath):
             pass
         else: raise
 
-def save_figure(path,filename,plt):
+def save_figure(path,filename,fig):
     mkdir_p(path)
-    plt.savefig("%s/%s"%(path,filename),bbox_inches='tight', dpi=(200))
-
+    #plt.savefig("%s/%s"%(path,filename),bbox_inches='tight', dpi=(200))
+    pp = PdfPages("%s/%s.pdf"%(path,filename))
+    pp.savefig(fig)
+    pp.close()
 
 
 def load_data(data_folder,look_back,look_ahead):
