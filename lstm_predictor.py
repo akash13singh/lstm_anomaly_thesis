@@ -21,7 +21,17 @@ from keras.callbacks import EarlyStopping
 # import plotly.graph_objs as go
 # plotly.tools.set_credentials_file(username='aakashsingh', api_key='iMfR7hS1dbnmJ9XB17XO')
 
-
+import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.pylab as pylab
+params = {'legend.fontsize': 'x-large',
+          'figure.figsize': (15, 5),
+         'axes.labelsize': 'x-large',
+         'axes.titlesize':'x-large',
+         'xtick.labelsize':'x-large',
+         'ytick.labelsize':'x-large'}
+pylab.rcParams.update(params)
+sns.set_style("whitegrid")
 
 
 def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,save_figure,Xserver):
@@ -29,18 +39,18 @@ def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,s
     if look_ahead > 1:
         step = look_ahead - 1
     for idx, i in enumerate(np.arange(0, look_ahead, step)):
-        plt.figure()
-        plt.title(title+" Timestep: %d "%i)
-        plt.xlabel("Time")
-        plt.ylabel("Value")
-        plt.plot(true_values, label="actual", linewidth=1)
-        plt.plot(predictions_timesteps[:, i], label="prediction", linewidth=1, linestyle="--")
+        fig = plt.figure()
+        #plt.title(title+" Timestep: %d "%i)
+        plt.xlabel("Time step")
+        plt.ylabel("Power Consumption")
+        plt.plot(true_values, label="True value", linewidth=1,color=sns.xkcd_rgb["denim blue"])
+        plt.plot(predictions_timesteps[:, i], label="Predicted value", linewidth=1, linestyle="--",color=sns.xkcd_rgb["medium green"])
         error = abs(true_values - predictions_timesteps[:, i])
-        plt.plot(error, label="error", linewidth=0.5)
-        plt.legend()
+        plt.plot(error, label='Error',color=sns.xkcd_rgb["pale red"], linewidth=0.5)
+        plt.legend(bbox_to_anchor=(1, .99))
         plt.tight_layout()
         if save_figure:
-            util.save_figure(path,"%s_timestep_%d"%(context,i), plt)
+            util.save_figure(path,"%s_timestep_%d"%(context,i), fig)
 
     if Xserver:
         plt.show()
@@ -162,7 +172,17 @@ def run():
     if cfg.run_config['save_figure']:
         plot_model(model, to_file="imgs/%s_lstm.png"%(experiment_id), show_shapes=True, show_layer_names=True)
     # train model on training set. validation1 set is used for early stopping
-    lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1), patience)
+
+    fig = plt.figure()
+    history = lstm.train_model(model, X_train, y_train, batch_size, epochs, shuffle, validation, (X_validation1, y_validation1), patience)
+    plt.plot(history.history['loss'])
+    plt.plot(history.history['val_loss'])
+    plt.ylabel('Loss')
+    plt.xlabel('Epoch')
+    plt.legend(['Train', 'Test'], loc='upper left')
+    plt.show()
+    if cfg.run_config['save_figure']:
+        util.save_figure("%s/%s/" % ("imgs", experiment_id), "train_errors", fig)
 
     validation2_loss = model.evaluate(X_validation2, y_validation2, batch_size=batch_size, verbose=2)
     print "Validation2 Loss %s" % (validation2_loss)
@@ -185,9 +205,9 @@ def run():
     print "Calculated validation1 loss %f" % (mean_squared_error(
         np.reshape(y_validation1, [len(y_validation1), look_ahead]),
         np.reshape(predictions_validation1_scaled, [len(predictions_validation1_scaled), look_ahead])))
-    np.save(data_folder + "validation2_predictions", predictions_validation1)
-    np.save(data_folder + "validation2_true", y_true_validation1)
-    np.save(data_folder + "validation2_labels", validation2_labels)
+    np.save(data_folder + "validation1_predictions", predictions_validation1)
+    np.save(data_folder + "validation1_true", y_true_validation1)
+    np.save(data_folder + "validation1_labels", validation2_labels)
 
     predictions_validation2, y_true_validation2 = get_predictions("Validation2", model, X_validation2, y_validation2,
                                                                   train_scaler, batch_size, look_ahead, look_back,
