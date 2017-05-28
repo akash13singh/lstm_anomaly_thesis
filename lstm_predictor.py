@@ -14,7 +14,7 @@ from keras.utils import plot_model
 import utilities.utils as util
 import numpy as np
 import logging
-from keras.callbacks import EarlyStopping
+
 
 # import plotly
 # import plotly.plotly as py
@@ -151,7 +151,7 @@ def run():
     layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']
     # optimizer = cfg.multi_step_lstm_config['optimizer']
-    shuffle = cfg.multi_step_lstm_config['shuffle']
+    shuffle = True
     patience = cfg.multi_step_lstm_config['patience']
     validation = cfg.multi_step_lstm_config['validation']
     learning_rate = cfg.multi_step_lstm_config['learning_rate']
