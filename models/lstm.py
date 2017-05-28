@@ -6,7 +6,7 @@ from keras.layers.wrappers import TimeDistributed
 import logging
 from keras.optimizers import Adam
 logger = logging.getLogger(__name__).addHandler(logging.StreamHandler())
-from keras.callbacks import EarlyStopping,Callback
+from keras.callbacks import EarlyStopping, Callback, TensorBoard
 import keras.backend as K
 
 
@@ -16,9 +16,22 @@ class ResetStatesCallback(Callback):
         self.model.reset_states()
 
     # def on_batch_begin(self, batch, logs={}):
-    #     print "batch number: %d"%(batch)
-    #     lr = K.get_value(self.model.optimizer.lr)
-    #     print lr
+    #     #print "states before batch %d" % (batch)
+    #     states = [K.get_value(s) for s, _ in self.model.state_updates]
+    #     print states
+
+class GetStatesCallback(Callback):
+    def on_epoch_end(self, epoch, logs={}):
+        print "On epoch end. epoch number: %d" % (epoch)
+        states = [K.get_value(s) for s, _ in self.model.state_updates]
+        print states
+
+    def on_batch_end(self, batch, logs={}):
+        #get sates
+        print "On batch end. batch number: %d"%(batch)
+        states = [K.get_value(s) for s,_ in self.model.state_updates]
+        print states
+
 
 class VanillaLSTM(object):
     #layers = {input: 1, 2: 64, 3: 256, 4: 100, output: 1}
@@ -191,6 +204,7 @@ def train_stateful_model(model, x_train, y_train, batch_size, epochs, shuffle, v
 def train_model(model, x_train, y_train, batch_size, epochs, shuffle, validation, validation_data, patience):
     logging.info("Training...")
     training_start_time = time.time()
+    #tensorboard = TensorBoard(log_dir='/home/esihakh/projects/github_thesis/lstm_anomaly_thesis/logs/tf_logs/', histogram_freq=5, write_graph=True, write_images=False)
     if validation:
         early_stopping = EarlyStopping(monitor='val_loss', patience=patience)
 
@@ -207,3 +221,10 @@ def train_model(model, x_train, y_train, batch_size, epochs, shuffle, validation
     # for epoch in range(epochs):
     #     model.fit(x_train, y_train, batch_size=batch_size, epochs=1,shuffle=shuffle, verbose=2)
     #     model.reset_states()
+
+def get_states(model):
+    return [K.get_value(s) for s,_ in model.state_updates]
+
+def set_states(model, states):
+    for (d,_), s in zip(model.state_updates, states):
+        K.set_value(d, s)
