@@ -102,7 +102,6 @@ def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,s
 def get_predictions(context,model,X,y,train_scaler,batch_size,look_ahead,look_back,epochs,experiment_id):
     predictions = model.predict(X, batch_size=batch_size)
     print predictions.shape
-    # rescale
     predictions = train_scaler.inverse_transform(predictions)
     y = train_scaler.inverse_transform(y)
 
@@ -151,7 +150,7 @@ def run():
     layers = cfg.multi_step_lstm_config['layers']
     loss = cfg.multi_step_lstm_config['loss']
     # optimizer = cfg.multi_step_lstm_config['optimizer']
-    shuffle = True
+    shuffle = cfg.multi_step_lstm_config['shuffle']
     patience = cfg.multi_step_lstm_config['patience']
     validation = cfg.multi_step_lstm_config['validation']
     learning_rate = cfg.multi_step_lstm_config['learning_rate']
