@@ -5,6 +5,7 @@ if cfg.run_config['Xserver']== False:
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from scipy.stats import norm
 if cfg.run_config['Xserver']:
     import seaborn as sns
@@ -32,6 +33,13 @@ def standardize(data):
     data = scaler.fit_transform(data)
 #     print "Scaler Mean: %f" % (scaler.mean_)
 #     print "Scaler Variance: %f" % (scaler.var_)
+    print "data mean %f, data variance %f"%(np.mean(data),np.var(data))
+    return data,scaler
+
+
+def scale_data(data):
+    scaler = MinMaxScaler()
+    data = scaler.fit_transform(data)
     print "data mean %f, data variance %f"%(np.mean(data),np.var(data))
     return data,scaler
 
