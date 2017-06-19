@@ -6,8 +6,11 @@ from keras.layers.wrappers import TimeDistributed
 import logging
 from keras.optimizers import Adam
 logger = logging.getLogger(__name__).addHandler(logging.StreamHandler())
-from keras.callbacks import EarlyStopping, Callback, TensorBoard
+from keras.callbacks import EarlyStopping, Callback, TensorBoard, ModelCheckpoint
 import keras.backend as K
+import shutil
+import os
+
 
 
 class ResetStatesCallback(Callback):
@@ -182,6 +185,16 @@ class StatefulMultiStepLSTM(object):
 def train_stateful_model(model, x_train, y_train, batch_size, epochs, shuffle, validation, validation_data, patience):
     logging.info("Training...")
     training_start_time = time.time()
+
+
+    try:
+        shutil.rmtree('checkpoints')
+    except:
+        pass
+    os.mkdir('checkpoints')
+    checkpoint = ModelCheckpoint(monitor='val_acc',filepath='checkpoints/model_{epoch:02d}_{val_acc:.3f}.h5',
+                                 save_best_only=True)
+
     if validation:
         early_stopping = EarlyStopping(monitor='val_loss', patience=patience)
 
@@ -228,3 +241,5 @@ def get_states(model):
 def set_states(model, states):
     for (d,_), s in zip(model.state_updates, states):
         K.set_value(d, s)
+
+
