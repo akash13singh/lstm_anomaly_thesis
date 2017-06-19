@@ -1,5 +1,17 @@
-import random
-random.seed(123)
+import numpy as np
+import tensorflow as tf
+import random as rn
+np.random.seed(123)
+rn.seed(123)
+#single thread
+session_conf = tf.ConfigProto(
+intra_op_parallelism_threads=1,
+inter_op_parallelism_threads=1)
+from keras import backend as K
+tf.set_random_seed(123)
+sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+K.set_session(sess)
+
 import models.lstm as lstm
 import configuration.config as cfg
 import matplotlib
@@ -54,49 +66,6 @@ def make_plots(context,predictions_timesteps,true_values,look_ahead,title,path,s
 
     if Xserver:
         plt.show()
-
-    # print "Plotting Validation results"
-    # x_data = np.arange(0, len(y_validation2_true))
-    # # trace_true = go.Scatter(
-    # #     x= x_data,
-    # #     y= testY_1,
-    # #     name = "actual"
-    # # )
-    #
-    # step = 1
-    # if look_ahead > 1:
-    #     step = look_ahead - 1
-    # for idx, i in enumerate(np.arange(0, look_ahead, step)):
-    #     plt.figure()
-    #     plt.title(
-    #         "Prediction on validation2 data for t+%d timestep.  %d epochs, look back %d, look_ahead %d & batch_size %d" % (
-    #         i + 1, epochs, look_back, look_ahead, batch_size))
-    #     plt.plot(y_validation2_true, label="actual", linewidth=1)
-    #     plt.plot(validation2_predictions_timesteps[:, i], label="prediction", linewidth=1)
-    #     error = abs(y_validation2_true - validation2_predictions_timesteps[:, i])
-    #     plt.plot(error, label="error", linewidth=0.5)
-    #     plt.legend()
-    #     plt.xlabel("Time")
-    #     plt.ylabel("Value")
-    #     plt.tight_layout()
-    #     if cfg.run_config['save_figure']:
-    #         util.save_figure("imgs/" + experiment_id, "validation_timestep_%d.png" % (i + 1), plt)
-    #
-    #         # trace_predicted = go.Scatter(
-    #         #     x=x_data,
-    #         #     y=test_diagonals[:, i],
-    #         #     name="predicted_t+%d" % (i + 1)
-    #         # )
-    #         # trace_error = go.Scatter(
-    #         #     x=x_data,
-    #         #     y=error,
-    #         #     name="error_t+%d" % (i + 1)
-    #         # )
-    #         # plotly_data = [trace_true,trace_predicted,trace_error]
-    #         # py.plot(plotly_data, filename='lstm_timestep_%d'%(i+1))
-    #
-    # if cfg.run_config['Xserver']:
-    #     plt.show()
 
 
 def get_predictions(context,model,X,y,train_scaler,batch_size,look_ahead,look_back,epochs,experiment_id):
