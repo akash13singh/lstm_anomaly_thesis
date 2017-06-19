@@ -1,5 +1,17 @@
-import random
-random.seed(123)
+import numpy as np
+import tensorflow as tf
+import random as rn
+np.random.seed(123)
+rn.seed(123)
+#single thread
+session_conf = tf.ConfigProto(
+intra_op_parallelism_threads=1,
+inter_op_parallelism_threads=1)
+from keras import backend as K
+tf.set_random_seed(123)
+sess = tf.Session(graph=tf.get_default_graph(), config=session_conf)
+K.set_session(sess)
+
 import models.lstm as lstm
 import configuration.config as cfg
 import matplotlib
