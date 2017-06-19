@@ -1,0 +1,34 @@
+import numpy as np
+import tensorflow as tf
+import random as rn
+np.random.seed(123)
+rn.seed(123)
+#single thread
+session_conf = tf.ConfigProto(
+intra_op_parallelism_threads=1,
+inter_op_parallelism_threads=1)
+
+data_folder = 'resources/data/NN_machine_temp/'
+look_back = 24
+look_ahead = 12
+batch_size = 1024
+epochs = 100
+patience = 1
+activation = 'sigmoid'
+learning_rate = .001
+decay = 0
+num_neurons_l1 = 32
+num_neurons_l2 = 32
+
+
+NN = Sequential()
+NN.add(Dense(32, input_shape=(look_back,),activation="sigmoid"))
+NN.add(Dense(32,activation="sigmoid"))
+NN.add(Dense(look_ahead))
+NN.compile(loss="mse",optimizer="Adam")
+early_stopping = EarlyStopping(monitor='val_loss', patience=patience)
+NN.fit(X_train, y_train, epochs=epochs, batch_size=batch_size,validation_data=(X_validation1, y_validation1),callbacks=[early_stopping ],shuffle=False)
+
+#######################################################################################
+###### ####### ########  ################# ################ ############ ############
+#######################################################################################

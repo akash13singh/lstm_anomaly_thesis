@@ -165,3 +165,105 @@ Calculated test loss 0.573302
 Process finished with exit code 0
 
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+run_config = { 'Xserver' : True,
+               'log_file' : 'logs/run.log',
+               'experiment_id' : "nab_jun7",
+               'data_folder': 'resources/data/nab/nab_machine_temperature/',
+               #'data_folder': 'resources/data/discords/space_shuttle/',
+               #'data_folder': 'resources/data/discords/dutch_power/',
+               #'data_folder': 'resources/data/discords/ECG/',
+               'save_figure': True
+               }
+
+opt_config = { 'Xserver' : True,
+               'log_file' : '../logs/opt.log',
+               'opt_run_id': "machine_temp_may24",
+               'data_folder': '../resources/data/discords/dutch_power/',
+               'save_figure': True,
+               'model': 'stateful',
+               'max_iter': 3,
+                'initial_evals': 1
+               }
+
+multi_step_lstm_config = {  'batch_size': 1023,
+                            'n_epochs': 200,
+                            'dropout': 0.1 ,
+                            'look_back': 24,
+                            'look_ahead':12,
+                            #'layers':{'input': 1, 'hidden1':20, 'hidden2':5,  'output': 1},
+                            #'layers':{'input': 1, 'hidden1': 200, 'hidden2': 80, 'hidden3': 40, 'hidden4': 10,'output': 1},
+                            'layers': {'input': 1, 'hidden1': 80, 'hidden2': 20,  'output': 1},
+                            'loss': 'mse',
+                            #'optimizer': 'adam',
+                            'train_test_ratio' : 0.7,
+                            'shuffle': False,
+                            'validation': True,
+                            'learning_rate': .05,
+                            'patience': 1,
+                           }
+
+2017-06-07 20:36:50,399. Run id nab_jun7
+2017-06-07 20:36:50,399.  HYPERPRAMRAMS : {'layers': {'input': 1, 'hidden1': 80, 'output': 1, 'hidden2': 20}, 'loss': 'mse', 'shuffle': False, 'learning_rate': 0.05, 'look_ahead': 12, 'batch_size': 1024, 'epochs': 200, 'patience': 1, 'experiment_id': 'nab_jun7', 'data_folder': 'resources/data/nab/nab_machine_temperature/', 'validation': True, 'look_back': 24, 'dropout': 0.1}
+2017-06-07 20:36:50,437. MultiStepLSTM LSTM Model Info: {'layers': {'input': 1, 'hidden1': 80, 'output': 1, 'hidden2': 20}, 'loss': 'mse', 'learning_rate': 0.05, 'look_ahead': 12, 'self': <models.lstm.MultiStepLSTM object at 0x7f6a9ccb7fd0>, 'look_back': 24, 'dropout': 0.1}
+2017-06-07 20:36:51,318. Compilation Time : 0.0325479507446
+2017-06-07 20:36:51,727. Training...
+2017-06-07 20:48:32,097. Training duration (s) : 700.369312048
+2017-06-07 20:48:32,097. Training Loss per epoch: [0.51132533717773954, 0.18612973490707335, 0.14665719664720625, 0.13178104769021903, 0.12317801586185446, 0.11822283416778283, 0.11404518540843354, 0.11206155414173488, 0.10987134182293044, 0.10739971403461446, 0.10560764197143985, 0.10410286227954776, 0.10325460981064512, 0.10293967073005314, 0.10165048339054336, 0.10247409164256396, 0.10177182352769229, 0.10107162077721053, 0.099265635550360901, 0.098776814751901906, 0.097279008030569686, 0.098375872965359629, 0.097754654541092167, 0.098087462434721287, 0.096817246360444434, 0.095732050132324123, 0.09569539799254842, 0.095282802526353697, 0.096096950014856214, 0.096048639869956043]
+2017-06-07 20:48:32,097. Validation  Loss per epoch: [0.080344289541244507, 0.074099242687225342, 0.065964438021183014, 0.056271713227033615, 0.055261518806219101, 0.053049173206090927, 0.053015727549791336, 0.050947751849889755, 0.049064226448535919, 0.046975079923868179, 0.045135378837585449, 0.041953109204769135, 0.040649451315402985, 0.038280799984931946, 0.037971034646034241, 0.036271795630455017, 0.0356023870408535, 0.033304326236248016, 0.032635297626256943, 0.032546322792768478, 0.031092477962374687, 0.030339660122990608, 0.03010064922273159, 0.028745595365762711, 0.028796186670660973, 0.028190776705741882, 0.027077596634626389, 0.026538360863924026, 0.026891101151704788, 0.026653891429305077]
+2017-06-07 20:48:37,466. Validation2 Loss 1.11993761438
+2017-06-07 20:48:39,013. Test Loss 0.31158772896
+2017-06-07 20:48:48,259. Train RMSE on 1 timestep prediction 1.249188
+2017-06-07 20:48:48,259. Train RMSE on 2 timestep prediction 1.431981
+2017-06-07 20:48:48,259. Train RMSE on 3 timestep prediction 1.644649
+2017-06-07 20:48:48,260. Train RMSE on 4 timestep prediction 1.868993
+2017-06-07 20:48:48,260. Train RMSE on 5 timestep prediction 2.092243
+2017-06-07 20:48:48,260. Train RMSE on 6 timestep prediction 2.309446
+2017-06-07 20:48:48,260. Train RMSE on 7 timestep prediction 2.519387
+2017-06-07 20:48:48,261. Train RMSE on 8 timestep prediction 2.720636
+2017-06-07 20:48:48,261. Train RMSE on 9 timestep prediction 2.913097
+2017-06-07 20:48:48,261. Train RMSE on 10 timestep prediction 3.096339
+2017-06-07 20:48:48,261. Train RMSE on 11 timestep prediction 3.271655
+2017-06-07 20:48:48,261. Train RMSE on 12 timestep prediction 3.438743
+2017-06-07 20:48:48,262.  Train RMSE Naive One Timestep Shift 1.052894
+2017-06-07 20:48:52,515. Validation1 RMSE on 1 timestep prediction 1.029173
+2017-06-07 20:48:52,515. Validation1 RMSE on 2 timestep prediction 1.056334
+2017-06-07 20:48:52,516. Validation1 RMSE on 3 timestep prediction 1.090465
+2017-06-07 20:48:52,516. Validation1 RMSE on 4 timestep prediction 1.132480
+2017-06-07 20:48:52,516. Validation1 RMSE on 5 timestep prediction 1.177268
+2017-06-07 20:48:52,516. Validation1 RMSE on 6 timestep prediction 1.227546
+2017-06-07 20:48:52,516. Validation1 RMSE on 7 timestep prediction 1.279704
+2017-06-07 20:48:52,517. Validation1 RMSE on 8 timestep prediction 1.339519
+2017-06-07 20:48:52,517. Validation1 RMSE on 9 timestep prediction 1.400774
+2017-06-07 20:48:52,517. Validation1 RMSE on 10 timestep prediction 1.463818
+2017-06-07 20:48:52,517. Validation1 RMSE on 11 timestep prediction 1.524986
+2017-06-07 20:48:52,517. Validation1 RMSE on 12 timestep prediction 1.585126
+2017-06-07 20:48:52,517.  Validation1 RMSE Naive One Timestep Shift 0.963371
+2017-06-07 20:48:58,128. Validation2 RMSE on 1 timestep prediction 8.455231
+2017-06-07 20:48:58,128. Validation2 RMSE on 2 timestep prediction 8.524670
+2017-06-07 20:48:58,128. Validation2 RMSE on 3 timestep prediction 8.608515
+2017-06-07 20:48:58,129. Validation2 RMSE on 4 timestep prediction 8.701709
+2017-06-07 20:48:58,129. Validation2 RMSE on 5 timestep prediction 8.801080
+2017-06-07 20:48:58,129. Validation2 RMSE on 6 timestep prediction 8.904414
+2017-06-07 20:48:58,129. Validation2 RMSE on 7 timestep prediction 9.010897
+2017-06-07 20:48:58,129. Validation2 RMSE on 8 timestep prediction 9.120607
+2017-06-07 20:48:58,129. Validation2 RMSE on 9 timestep prediction 9.233077
+2017-06-07 20:48:58,130. Validation2 RMSE on 10 timestep prediction 9.347462
+2017-06-07 20:48:58,130. Validation2 RMSE on 11 timestep prediction 9.463007
+2017-06-07 20:48:58,130. Validation2 RMSE on 12 timestep prediction 9.579203
+2017-06-07 20:48:58,130.  Validation2 RMSE Naive One Timestep Shift 1.169791
+2017-06-07 20:49:02,771. Test RMSE on 1 timestep prediction 3.962827
+2017-06-07 20:49:02,771. Test RMSE on 2 timestep prediction 4.066047
+2017-06-07 20:49:02,771. Test RMSE on 3 timestep prediction 4.186681
+2017-06-07 20:49:02,772. Test RMSE on 4 timestep prediction 4.319655
+2017-06-07 20:49:02,772. Test RMSE on 5 timestep prediction 4.461570
+2017-06-07 20:49:02,772. Test RMSE on 6 timestep prediction 4.609112
+2017-06-07 20:49:02,772. Test RMSE on 7 timestep prediction 4.760863
+2017-06-07 20:49:02,773. Test RMSE on 8 timestep prediction 4.916169
+2017-06-07 20:49:02,773. Test RMSE on 9 timestep prediction 5.074565
+2017-06-07 20:49:02,773. Test RMSE on 10 timestep prediction 5.234870
+2017-06-07 20:49:02,773. Test RMSE on 11 timestep prediction 5.397081
+2017-06-07 20:49:02,774. Test RMSE on 12 timestep prediction 5.559955
+2017-06-07 20:49:02,774.  Test RMSE Naive One Timestep Shift 1.178085
+2017-06-07 20:49:07,271. -------------------------run complete----------------------------------------------
