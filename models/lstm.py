@@ -4,7 +4,7 @@ from keras.layers.recurrent import LSTM
 from keras.models import Sequential
 from keras.layers.wrappers import TimeDistributed
 import logging
-from keras.optimizers import Adam
+from keras.optimizers import Adam, RMSprop
 logger = logging.getLogger(__name__).addHandler(logging.StreamHandler())
 from keras.callbacks import EarlyStopping, Callback, TensorBoard, ModelCheckpoint
 import keras.backend as K
@@ -127,6 +127,7 @@ class MultiStepLSTM(object):
         # compile model and print summary
         start = time.time()
         self.model.compile(loss=self.loss, optimizer= Adam(lr=self.learning_rate,decay=.99))
+        #self.model.compile(loss=self.loss, optimizer=RMSprop(lr=self.learning_rate))
         logging.info("Compilation Time : %s" % str(time.time() - start))
         self.model.summary()
         return self.model
