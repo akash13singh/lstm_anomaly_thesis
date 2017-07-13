@@ -13,3 +13,5 @@ logs/
 *.txt~
 *.pdf
 *.npy
+*.png
+*.jpg
