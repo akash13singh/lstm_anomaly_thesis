@@ -11,3 +11,5 @@ env/
 logs/
 #optimization/imgs/
 *.txt~
+*.pdf
+*.npy
