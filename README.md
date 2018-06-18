@@ -1,5 +1,5 @@
 # Anomaly Detection for Temporal Data using LSTM.
-This is the code used in my thesis which was on LSTM based anomaly detection for time series data. The thesis report can be downloaded from [here](http://www.diva-portal.org/smash/record.jsf?pid=diva2:1149130).
+This repository contains the code used in my master thesis on LSTM based anomaly detection for time series data. The thesis report can be downloaded from [here](http://www.diva-portal.org/smash/record.jsf?pid=diva2:1149130).
 
 **Abstract**
 
