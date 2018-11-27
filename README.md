@@ -13,7 +13,7 @@ We explore the use of Long short-term memory (LSTM) for anomaly detection in tem
 
 
 
-##Configutation: 
+## Configuration: 
 First set the configuration settings in configuration/config.py. This file has different configuration settings.
 
         1. Use `run_config` to set parameters for the program execution
