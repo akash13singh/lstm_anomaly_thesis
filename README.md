@@ -12,9 +12,10 @@ We explore the use of Long short-term memory (LSTM) for anomaly detection in tem
 4. GPyOpt 1.0.3. (only required for hyper-parameter tuning)
 
 
-## How to Execute:
-1. **Configutation**: First set the configuration settings in configuration/config.py.
-    1. This file has different configuration settings.
+
+##Configutation: 
+First set the configuration settings in configuration/config.py. This file has different configuration settings.
+
         1. Use `run_config` to set parameters for the program execution
          like data folder, log_file etc.
             * Xserver: denotes if the machine has a display environment. Set it to false when
@@ -25,9 +26,11 @@ We explore the use of Long short-term memory (LSTM) for anomaly detection in tem
            [1](https://github.com/SheffieldML/GPyOpt) ,[2](http://pythonhosted.org/GPyOpt/)
 
         3. `multi_step_lstm_config`: contains parameters specific to LSTM network
+        
+For hyper-parameters used refer to table 4.1 in thesis reports.
 
-
-2. **Data Pre-processing**: The LSTM network needs data formatted to cuch that each input
+## How to Execute:
+1. **Data Pre-processing**: The LSTM network needs data formatted such that each input
  sample has *look_back* number of data points and each output sample has *look_ahead* number
  of time-steps. To convert the data into appropriate format and create train, test,  and validation datasets python notebooks have been used.
  We provide notebooks for the three datasets used in the thesis which can be used as examples for new datasets.
@@ -35,16 +38,18 @@ We explore the use of Long short-term memory (LSTM) for anomaly detection in tem
     1. ECG: notebooks/discords_ECG.ipynb, resources/data/discords/ECG/
     2. power_consumption: notebooks/discords_power_consumption.ipynb, resources/data/discords/dutch_power/
     3. machine_temperature: notebooks/NAB_machine_temp.ipynb, resources/data/nab/nab_machine_temperature/
+    
+ This step is done in "Part 1" of corresponding notebook.
 
-3. **Prediction Model Execution**: The main LSTM models used are in the file models/lstm.py. Training the model and generating predictions two main files
+2. **Prediction Modeling**: The main LSTM models used are in the file models/lstm.py. For training the model and generating predictions two main files
     are provided:
      1. *lstm_predictor.py*: This file uses the default LSTM implementation by keras.
      2. *stateful_lstm_predictor.py*: uses the stateful LSTM implementation
 
-    Once the configuration setting `data_folder` has been set correctly, the code will look for train, tes and validation sets in those files.
+    Once the configuration setting `data_folder` has been set correctly, the code will look for train, test, and validation sets in those files.
 
 
-4. **Anomaly Detection**:
-Running the LSTM models which generate the predictions for train, test, and validation sets. Fr anomaly detection we need to calculate prediction errors or residuals,
-model them using Gaussian distribution and then set thresholds. Thse steps are again done in the notebook files specified in step **2**.
+3. **Anomaly Detection**:
+Running the LSTM models which generate the predictions for train, test, and validation sets. For anomaly detection we need to calculate prediction errors or residuals,
+model them using Gaussian distribution and then set thresholds. This is done in "Part 3" of the corresponding notebook files.
 
